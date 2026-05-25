@@ -109,7 +109,7 @@ export function GalleryModal({ gallery }: GalleryModalProps) {
 
         {/* Thumbnails */}
         {images.length > 1 && (
-          <div className="flex items-center gap-2 px-4 overflow-x-auto max-w-full pb-1 scrollbar-hide">
+          <div className="flex items-center gap-2 px-4 overflow-x-auto max-w-full pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {images.map((src, index) => (
               <button
                 key={index}
