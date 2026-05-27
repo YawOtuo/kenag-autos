@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden bg-paper">
       <div className="max-w-[1180px] mx-auto px-6 md:px-8 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.92fr)_minmax(360px,1.08fr)] items-center gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.92fr)_minmax(360px,1.08fr)] items-center gap-5 sm:gap-8 lg:gap-16">
           <div className="order-2 lg:order-1">
             <h1 className="text-ink text-[clamp(2.25rem,5vw,3.9rem)] font-black leading-[1.06] tracking-tight mb-5">
               Vehicle imports from the US, Europe, and Asia
@@ -39,10 +39,10 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="relative order-1 min-h-[260px] sm:min-h-[330px] lg:order-2 lg:min-h-[430px]">
+          <div className="relative order-1 -mx-6 min-h-[260px] sm:-mx-8 sm:min-h-[330px] lg:order-2 lg:mx-0 lg:min-h-[430px]">
             <div className="absolute inset-x-0 bottom-[12%] h-px bg-line" />
             <div className="absolute inset-x-[8%] bottom-[8%] h-3 rounded-full bg-charcoal/10 blur-sm" />
-            <div className="relative mx-auto aspect-[400/250] w-full max-w-[660px]">
+            <div className="relative mx-auto aspect-[400/250] w-screen max-w-none lg:w-full lg:max-w-[660px]">
               <LottieAnimation
                 animationData={carAnimation}
                 className="h-full w-full"
