@@ -40,7 +40,6 @@ export function Hero() {
           </div>
 
           <div className="relative order-1 -mx-6 min-h-[260px] sm:-mx-8 sm:min-h-[330px] lg:order-2 lg:mx-0 lg:min-h-[430px]">
-            <div className="absolute inset-x-0 bottom-[12%] h-px bg-line" />
             <div className="absolute inset-x-[8%] bottom-[8%] h-3 rounded-full bg-charcoal/10 blur-sm" />
             <div className="relative mx-auto aspect-[400/250] w-screen max-w-none lg:w-full lg:max-w-[660px]">
               <LottieAnimation
