@@ -31,6 +31,7 @@ interface VehicleCardProps {
 
 export function VehicleCard({ vehicle, onImageClick }: VehicleCardProps) {
   const isSold = vehicle.status === "sold";
+  const showStatusBadge = vehicle.status !== "available";
   const imageUrl = vehicle.images?.[0] ? urlFor(vehicle.images[0]).width(800).height(600).url() : "/assets/vehicle-suv.png";
   const hasImages = (vehicle.images?.length ?? 0) > 0;
 
@@ -54,9 +55,11 @@ export function VehicleCard({ vehicle, onImageClick }: VehicleCardProps) {
           className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-        <div className="absolute top-3 left-3">
-          <StatusBadge status={vehicle.status} />
-        </div>
+        {showStatusBadge && (
+          <div className="absolute top-3 left-3">
+            <StatusBadge status={vehicle.status} />
+          </div>
+        )}
         {isSold && (
           <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
             <span className="text-ink text-sm font-bold tracking-[0.15em] uppercase">Sold</span>

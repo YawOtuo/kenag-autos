@@ -84,7 +84,7 @@ export function VehicleGrid() {
           </p>
         </div>
 
-        <div className="mb-12 grid grid-cols-1 gap-4 border-b border-[#eee] pb-6 sm:grid-cols-2 sm:max-w-[460px]">
+        <div className="mb-6 grid grid-cols-2 gap-3 border-b border-[#eee] pb-4 sm:max-w-[460px] sm:gap-4">
           <label className="space-y-1.5">
             <span className="text-muted text-xs font-semibold uppercase tracking-wider">
               Category
@@ -93,7 +93,7 @@ export function VehicleGrid() {
               value={category}
               onValueChange={(value) => setCategory(value as typeof category)}
             >
-              <SelectTrigger className="h-11 w-full rounded-xl border-[#e0e0e0] bg-white px-3 text-ink">
+              <SelectTrigger className="h-11 w-full rounded-xl border-[#e0e0e0] bg-white px-2.5 text-ink sm:px-3">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent align="start">
@@ -114,7 +114,7 @@ export function VehicleGrid() {
               value={status}
               onValueChange={(value) => setStatus(value as typeof status)}
             >
-              <SelectTrigger className="h-11 w-full rounded-xl border-[#e0e0e0] bg-white px-3 text-ink">
+              <SelectTrigger className="h-11 w-full rounded-xl border-[#e0e0e0] bg-white px-2.5 text-ink sm:px-3">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent align="start">
