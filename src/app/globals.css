@@ -8,10 +8,13 @@
   --color-line: #ded8cb;
   --color-red: #b71f2c;
   --color-red-dark: #891622;
+  --color-primary: var(--color-red);
+  --color-primary-foreground: #ffffff;
   --color-gold: #c7922e;
   --color-green: #1e6f4b;
   --color-charcoal: #23201d;
   --color-warm: #3b3935;
+  --radius-button: 999px;
   --font-sans: var(--font-inter);
 }
 
@@ -22,11 +25,6 @@ html {
 body {
   background: #ffffff;
   color: var(--color-ink);
-}
-
-.dark body {
-  background: #0a0a0a;
-  color: #f0f0f0;
 }
 
 @keyframes shimmer {
@@ -42,9 +40,4 @@ body {
   background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
-}
-
-.dark .animate-shimmer {
-  background: linear-gradient(90deg, #1a1a1a 25%, #222 50%, #1a1a1a 75%);
-  background-size: 200% 100%;
 }

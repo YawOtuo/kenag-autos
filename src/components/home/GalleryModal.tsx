@@ -5,6 +5,7 @@ import { useGallery } from "@/hooks/useGallery";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 interface GalleryModalProps {
   gallery: ReturnType<typeof useGallery>;
@@ -47,14 +48,16 @@ export function GalleryModal({ gallery }: GalleryModalProps) {
             {title}
           </h2>
         </div>
-        <button
+        <Button
+          type="button"
           onClick={close}
-          className="flex items-center gap-1.5 text-white/80 hover:text-white transition-colors text-sm font-semibold px-3 py-2 rounded-md hover:bg-white/10"
+          variant="glass"
+          className="border-transparent bg-transparent text-white/80 hover:text-white"
           aria-label="Close gallery"
         >
           <X className="w-5 h-5" />
           <span className="hidden sm:inline">Close</span>
-        </button>
+        </Button>
       </div>
 
       {/* Main image area */}
@@ -82,20 +85,26 @@ export function GalleryModal({ gallery }: GalleryModalProps) {
         {/* Navigation arrows */}
         {images.length > 1 && (
           <>
-            <button
+            <Button
+              type="button"
               onClick={prev}
-              className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-all backdrop-blur-sm border border-white/10"
+              variant="glass"
+              size="icon-lg"
+              className="absolute left-2 sm:left-4 md:left-6 top-1/2 z-10 size-10 -translate-y-1/2 border-white/10 backdrop-blur-sm md:size-12"
               aria-label="Previous photo"
             >
               <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
-            <button
+            </Button>
+            <Button
+              type="button"
               onClick={next}
-              className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-all backdrop-blur-sm border border-white/10"
+              variant="glass"
+              size="icon-lg"
+              className="absolute right-2 sm:right-4 md:right-6 top-1/2 z-10 size-10 -translate-y-1/2 border-white/10 backdrop-blur-sm md:size-12"
               aria-label="Next photo"
             >
               <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
+            </Button>
           </>
         )}
       </div>

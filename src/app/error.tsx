@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
@@ -11,12 +12,13 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
     <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-4">
       <h2 className="text-2xl font-bold text-ink">Something went wrong</h2>
       <p className="text-muted text-center max-w-md">{error.message || "An unexpected error occurred."}</p>
-      <button
+      <Button
         onClick={reset}
-        className="min-h-[46px] px-[18px] bg-red text-white font-black text-[0.94rem] rounded-md hover:bg-red-dark transition-colors"
+        variant="red"
+        size="lg"
       >
         Try again
-      </button>
+      </Button>
     </div>
   );
 }

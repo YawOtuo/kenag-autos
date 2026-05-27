@@ -27,13 +27,13 @@ const steps = [
 
 export function ProcessSteps() {
   return (
-    <section id="process" className="py-20 md:py-24 bg-white dark:bg-[#0a0a0a] border-t border-[#eee] dark:border-[#222]">
+    <section id="process" className="py-20 md:py-24 bg-white border-t border-[#eee]">
       <div className="max-w-[1100px] mx-auto px-6 md:px-8">
         <div className="mb-14">
           <p className="text-red text-sm font-semibold tracking-[0.1em] uppercase mb-3">
             How it works
           </p>
-          <h2 className="text-ink dark:text-white text-3xl md:text-4xl font-black leading-tight">
+          <h2 className="text-ink text-3xl md:text-4xl font-black leading-tight">
             From search to handover
           </h2>
         </div>
@@ -48,11 +48,11 @@ export function ProcessSteps() {
               transition={{ duration: 0.4, delay: index * 0.08 }}
               className="flex gap-5"
             >
-              <span className="text-red/30 dark:text-red/20 text-5xl font-black leading-none shrink-0">
+              <span className="text-red/30 text-5xl font-black leading-none shrink-0">
                 {step.num}
               </span>
               <div>
-                <h3 className="text-ink dark:text-white text-lg font-bold mb-2">{step.title}</h3>
+                <h3 className="text-ink text-lg font-bold mb-2">{step.title}</h3>
                 <p className="text-muted leading-relaxed">{step.desc}</p>
               </div>
             </motion.div>

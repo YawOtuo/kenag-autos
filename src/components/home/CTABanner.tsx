@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, ArrowRight } from "lucide-react";
+import { LinkButton } from "@/components/ui/link-button";
 
 export function CTABanner() {
   return (
@@ -25,29 +25,34 @@ export function CTABanner() {
           </p>
           
           <div className="flex flex-wrap justify-center gap-4">
-            <Link
+            <LinkButton
               href="/#sourcing"
-              className="group inline-flex items-center gap-2 min-h-[52px] px-7 bg-red text-white font-black text-base rounded-lg shadow-lg shadow-red/25 hover:bg-red-dark transition-all duration-300 hover:-translate-y-0.5"
+              variant="red"
+              size="xl"
+              className="group shadow-lg hover:-translate-y-0.5"
             >
               Start Your Request
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <a
+            </LinkButton>
+            <LinkButton
               href="https://wa.me/233241234567"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 min-h-[52px] px-7 bg-[#25D366] text-white font-bold text-base rounded-lg hover:bg-[#128C7E] transition-all duration-300 hover:-translate-y-0.5"
+              variant="whatsapp"
+              size="xl"
+              className="hover:-translate-y-0.5"
             >
               <MessageCircle className="w-5 h-5" />
               WhatsApp Us
-            </a>
-            <a
+            </LinkButton>
+            <LinkButton
               href="tel:+233241234567"
-              className="inline-flex items-center gap-2 min-h-[52px] px-7 bg-white/10 text-white font-bold text-base rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
+              variant="glass"
+              size="xl"
             >
               <Phone className="w-4 h-4" />
               Call Now
-            </a>
+            </LinkButton>
           </div>
         </motion.div>
       </div>

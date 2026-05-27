@@ -1,19 +1,21 @@
 "use client";
 
-import Link from "next/link";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { useVehicles } from "@/hooks/useVehicles";
-import { StatusBadge } from "@/components/shared/StatusBadge";
 import { urlFor } from "@/lib/sanity";
-import Image from "next/image";
 import { AlertCircle } from "lucide-react";
+import { LinkButton } from "@/components/ui/link-button";
+import { VehicleCard } from "@/components/home/VehicleCard";
+import { GalleryModal } from "@/components/home/GalleryModal";
+import { useGallery } from "@/hooks/useGallery";
 
 const ARRIVAL_STATUSES = ["arriving", "in-transit", "clearing"];
 
 export default function ArrivingSoonPage() {
   const { vehicles, isLoading, error } = useVehicles();
   const arrivals = vehicles.filter((v) => ARRIVAL_STATUSES.includes(v.status));
+  const gallery = useGallery();
 
   return (
     <>
@@ -33,12 +35,13 @@ export default function ArrivingSoonPage() {
                   Vehicles currently in transit or expected in Ghana. Register interest before they land in Kumasi.
                 </p>
               </div>
-              <Link
+              <LinkButton
                 href="/#sourcing"
-                className="inline-flex items-center h-11 px-5 bg-ink text-white text-sm font-bold hover:bg-charcoal transition-colors shrink-0"
+                size="lg"
+                className="shrink-0"
               >
                 Ask about a vehicle
-              </Link>
+              </LinkButton>
             </div>
           </div>
         </section>
@@ -46,20 +49,14 @@ export default function ArrivingSoonPage() {
         <section className="py-16 md:py-20">
           <div className="max-w-[1100px] mx-auto px-6 md:px-8">
             {isLoading && (
-              <div className="space-y-10">
-                {[1, 2].map((i) => (
-                  <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="aspect-[4/3] bg-[#f5f5f5] animate-shimmer" />
-                    <div className="space-y-3 py-2">
-                      <div className="h-4 w-20 bg-[#f0f0f0] rounded" />
-                      <div className="h-8 w-3/4 bg-[#f0f0f0] rounded" />
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-10">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i}>
+                    <div className="aspect-[4/3] bg-[#f5f5f5] mb-4 animate-shimmer" />
+                    <div className="space-y-2">
+                      <div className="h-5 w-2/3 bg-[#f0f0f0] rounded" />
                       <div className="h-4 w-full bg-[#f0f0f0] rounded" />
-                      <div className="grid grid-cols-2 gap-4 mt-4">
-                        <div className="h-14 bg-[#f0f0f0] rounded" />
-                        <div className="h-14 bg-[#f0f0f0] rounded" />
-                        <div className="h-14 bg-[#f0f0f0] rounded" />
-                        <div className="h-14 bg-[#f0f0f0] rounded" />
-                      </div>
+                      <div className="h-4 w-1/2 bg-[#f0f0f0] rounded" />
                     </div>
                   </div>
                 ))}
@@ -80,58 +77,20 @@ export default function ArrivingSoonPage() {
             )}
 
             {!isLoading && !error && arrivals.length > 0 && (
-              <div className="space-y-10">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-12">
                 {arrivals.map((vehicle) => (
-                  <div
+                  <VehicleCard
                     key={vehicle._id}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-10 border-b border-[#eee] last:border-0"
-                  >
-                    <div className="relative aspect-[4/3] bg-[#f5f5f5]">
-                      <Image
-                        src={vehicle.images?.[0] ? urlFor(vehicle.images[0]).width(800).height(600).url() : "/assets/vehicle-suv.png"}
-                        alt={vehicle.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                    </div>
-                    <div className="py-2">
-                      <StatusBadge status={vehicle.status} />
-                      <h3 className="text-ink text-2xl font-bold mt-3 mb-2">
-                        {vehicle.title}
-                      </h3>
-                      <p className="text-muted text-sm leading-relaxed mb-6">
-                        {vehicle.make && vehicle.model && `${vehicle.make} ${vehicle.model}. `}
-                        Photos available for exterior, interior, engine, mileage, and VIN.
-                      </p>
-                      <div className="grid grid-cols-2 gap-x-6 gap-y-4 mb-6">
-                        <div>
-                          <p className="text-muted text-xs font-semibold uppercase tracking-wider">From</p>
-                          <p className="text-ink font-bold">{vehicle.sourceCountry || "US"}</p>
-                        </div>
-                        <div>
-                          <p className="text-muted text-xs font-semibold uppercase tracking-wider">Mileage</p>
-                          <p className="text-ink font-bold">{vehicle.mileage || "TBC"}</p>
-                        </div>
-                        <div>
-                          <p className="text-muted text-xs font-semibold uppercase tracking-wider">Arrival</p>
-                          <p className="text-ink font-bold">{vehicle.estimatedArrivalDate || "To confirm"}</p>
-                        </div>
-                        <div>
-                          <p className="text-muted text-xs font-semibold uppercase tracking-wider">Status</p>
-                          <p className="text-ink font-bold capitalize">{vehicle.status.replace("-", " ")}</p>
-                        </div>
-                      </div>
-                      {vehicle.acceptingInterest && (
-                        <Link
-                          href="/#sourcing"
-                          className="inline-flex items-center h-11 px-5 bg-ink text-white text-sm font-bold hover:bg-charcoal transition-colors"
-                        >
-                          Register interest
-                        </Link>
-                      )}
-                    </div>
-                  </div>
+                    vehicle={vehicle}
+                    onImageClick={() => {
+                      const images = (vehicle.images || []).map((img) =>
+                        urlFor(img).width(1020).height(600).url()
+                      );
+                      if (images.length > 0) {
+                        gallery.open(images, vehicle.title);
+                      }
+                    }}
+                  />
                 ))}
               </div>
             )}
@@ -139,6 +98,7 @@ export default function ArrivingSoonPage() {
         </section>
       </main>
       <SiteFooter />
+      <GalleryModal gallery={gallery} />
     </>
   );
 }

@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { FadeInUp } from "@/components/shared/FadeInUp";
+import { LinkButton } from "@/components/ui/link-button";
 
 export function ContactSection() {
   return (
@@ -21,18 +21,22 @@ export function ContactSection() {
       </FadeInUp>
       <FadeInUp delay={0.1}>
         <div className="flex flex-wrap gap-3">
-          <Link
+          <LinkButton
             href="/#sourcing"
-            className="inline-flex items-center justify-center min-h-[46px] px-[18px] bg-red text-white font-black text-[0.94rem] rounded-md shadow-[0_12px_28px_rgba(183,31,44,0.28)] hover:bg-red-dark transition-all duration-200 hover:-translate-y-0.5"
+            variant="red"
+            size="lg"
+            className="shadow-[0_12px_28px_rgba(183,31,44,0.28)] hover:-translate-y-0.5"
           >
             Start a vehicle request
-          </Link>
-          <Link
+          </LinkButton>
+          <LinkButton
             href="/#inventory"
-            className="inline-flex items-center justify-center min-h-[46px] px-[18px] bg-white text-ink font-black text-[0.94rem] rounded-md hover:bg-white/90 transition-all duration-200 hover:-translate-y-0.5"
+            variant="light"
+            size="lg"
+            className="text-ink hover:-translate-y-0.5"
           >
             View common imports
-          </Link>
+          </LinkButton>
         </div>
       </FadeInUp>
     </section>

@@ -14,7 +14,7 @@ export function RequestForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="space-y-1.5">
-        <Label htmlFor="name" className="text-sm font-semibold text-ink dark:text-white">
+        <Label htmlFor="name" className="text-sm font-semibold text-ink">
           Full name
         </Label>
         <Input
@@ -25,13 +25,13 @@ export function RequestForm() {
           required
           value={fields.name}
           onChange={handleChange}
-          className={`h-11 border-[#e0e0e0] dark:border-[#333] bg-white dark:bg-[#111] text-ink dark:text-white focus:border-ink dark:focus:border-white focus:ring-0 rounded-none ${errors.name ? "border-red" : ""}`}
+          className={`h-11 border-[#e0e0e0] bg-white text-ink focus:border-ink focus:ring-0 rounded-xl ${errors.name ? "border-red" : ""}`}
         />
         {errors.name && <p className="text-red text-xs">{errors.name}</p>}
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="phone" className="text-sm font-semibold text-ink dark:text-white">
+        <Label htmlFor="phone" className="text-sm font-semibold text-ink">
           Phone or WhatsApp
         </Label>
         <Input
@@ -42,13 +42,13 @@ export function RequestForm() {
           required
           value={fields.phone}
           onChange={handleChange}
-          className={`h-11 border-[#e0e0e0] dark:border-[#333] bg-white dark:bg-[#111] text-ink dark:text-white focus:border-ink dark:focus:border-white focus:ring-0 rounded-none ${errors.phone ? "border-red" : ""}`}
+          className={`h-11 border-[#e0e0e0] bg-white text-ink focus:border-ink focus:ring-0 rounded-xl ${errors.phone ? "border-red" : ""}`}
         />
         {errors.phone && <p className="text-red text-xs">{errors.phone}</p>}
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="vehicle" className="text-sm font-semibold text-ink dark:text-white">
+        <Label htmlFor="vehicle" className="text-sm font-semibold text-ink">
           Vehicle wanted
         </Label>
         <Input
@@ -59,13 +59,13 @@ export function RequestForm() {
           required
           value={fields.vehicle}
           onChange={handleChange}
-          className={`h-11 border-[#e0e0e0] dark:border-[#333] bg-white dark:bg-[#111] text-ink dark:text-white focus:border-ink dark:focus:border-white focus:ring-0 rounded-none ${errors.vehicle ? "border-red" : ""}`}
+          className={`h-11 border-[#e0e0e0] bg-white text-ink focus:border-ink focus:ring-0 rounded-xl ${errors.vehicle ? "border-red" : ""}`}
         />
         {errors.vehicle && <p className="text-red text-xs">{errors.vehicle}</p>}
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="source" className="text-sm font-semibold text-ink dark:text-white">
+        <Label htmlFor="source" className="text-sm font-semibold text-ink">
           Preferred source
         </Label>
         <select
@@ -73,7 +73,7 @@ export function RequestForm() {
           name="source"
           value={fields.source}
           onChange={handleChange}
-          className="h-11 w-full px-3 border border-[#e0e0e0] dark:border-[#333] bg-white dark:bg-[#111] text-ink dark:text-white focus:border-ink dark:focus:border-white focus:outline-none"
+          className="h-11 w-full px-3 border border-[#e0e0e0] bg-white text-ink rounded-xl focus:border-ink focus:outline-none"
         >
           {sourceOptions.map((opt) => (
             <option key={opt} value={opt}>{opt}</option>
@@ -82,7 +82,7 @@ export function RequestForm() {
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="budget" className="text-sm font-semibold text-ink dark:text-white">
+        <Label htmlFor="budget" className="text-sm font-semibold text-ink">
           Budget range
         </Label>
         <Input
@@ -92,7 +92,7 @@ export function RequestForm() {
           placeholder="Example: GHS 180,000 - 250,000"
           value={fields.budget}
           onChange={handleChange}
-          className="h-11 border-[#e0e0e0] dark:border-[#333] bg-white dark:bg-[#111] text-ink dark:text-white focus:border-ink dark:focus:border-white focus:ring-0 rounded-none"
+          className="h-11 border-[#e0e0e0] bg-white text-ink focus:border-ink focus:ring-0 rounded-xl"
         />
       </div>
 
@@ -104,7 +104,8 @@ export function RequestForm() {
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full h-12 bg-ink dark:bg-white text-white dark:text-ink font-bold hover:bg-charcoal dark:hover:bg-white/90 transition-colors rounded-none disabled:opacity-50"
+        size="lg"
+        className="w-full h-12 disabled:opacity-50"
       >
         {isSubmitting ? "Sending..." : (
           <>

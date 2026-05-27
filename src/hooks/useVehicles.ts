@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity";
 
 interface Vehicle {
@@ -39,20 +39,34 @@ export function useVehicles(featuredOnly = false) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
-  useMemo(() => {
+  useEffect(() => {
+    let isMounted = true;
+
     const fetchVehicles = async () => {
       try {
         setIsLoading(true);
         const query = featuredOnly ? FEATURED_VEHICLES_QUERY : ALL_VEHICLES_QUERY;
         const data = await client.fetch<Vehicle[]>(query);
-        setVehicles(data);
+        if (isMounted) {
+          setVehicles(data);
+          setError(null);
+        }
       } catch (err) {
-        setError(err instanceof Error ? err : new Error("Failed to fetch vehicles"));
+        if (isMounted) {
+          setError(err instanceof Error ? err : new Error("Failed to fetch vehicles"));
+        }
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
+
     fetchVehicles();
+
+    return () => {
+      isMounted = false;
+    };
   }, [featuredOnly]);
 
   return { vehicles, isLoading, error };

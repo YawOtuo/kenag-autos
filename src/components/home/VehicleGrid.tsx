@@ -7,6 +7,30 @@ import { useGallery } from "@/hooks/useGallery";
 import { urlFor } from "@/lib/sanity";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertCircle } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const categoryOptions = [
+  { value: "all", label: "All categories" },
+  { value: "sedan", label: "Sedans" },
+  { value: "suv", label: "SUVs" },
+  { value: "pickup", label: "Pickups" },
+] as const;
+
+const statusOptions = [
+  { value: "all", label: "All statuses" },
+  { value: "arriving", label: "Arriving" },
+  { value: "in-transit", label: "In transit" },
+  { value: "clearing", label: "Clearing" },
+  { value: "available", label: "Available" },
+  { value: "reserved", label: "Reserved" },
+  { value: "sold", label: "Sold" },
+] as const;
 
 export function VehicleGrid() {
   const { filteredVehicles, category, status, setCategory, setStatus, isLoading, error } =
@@ -15,16 +39,16 @@ export function VehicleGrid() {
 
   if (isLoading) {
     return (
-      <section id="inventory" className="py-20 md:py-24 bg-white dark:bg-[#0a0a0a]">
+      <section id="inventory" className="py-20 md:py-24 bg-white">
         <div className="max-w-[1100px] mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-10">
+            {[1, 2, 3, 4].map((i) => (
               <div key={i}>
-                <div className="aspect-[4/3] bg-[#f5f5f5] dark:bg-[#1a1a1a] mb-4 animate-shimmer" />
+                <div className="aspect-[4/3] bg-[#f5f5f5] mb-4 animate-shimmer" />
                 <div className="space-y-2">
-                  <div className="h-5 w-2/3 bg-[#f0f0f0] dark:bg-[#1a1a1a] rounded" />
-                  <div className="h-4 w-full bg-[#f0f0f0] dark:bg-[#1a1a1a] rounded" />
-                  <div className="h-4 w-1/2 bg-[#f0f0f0] dark:bg-[#1a1a1a] rounded" />
+                  <div className="h-5 w-2/3 bg-[#f0f0f0] rounded" />
+                  <div className="h-4 w-full bg-[#f0f0f0] rounded" />
+                  <div className="h-4 w-1/2 bg-[#f0f0f0] rounded" />
                 </div>
               </div>
             ))}
@@ -36,7 +60,7 @@ export function VehicleGrid() {
 
   if (error) {
     return (
-      <section id="inventory" className="py-20 md:py-24 bg-white dark:bg-[#0a0a0a]">
+      <section id="inventory" className="py-20 md:py-24 bg-white">
         <div className="max-w-[1100px] mx-auto px-6 md:px-8 text-center">
           <AlertCircle className="w-8 h-8 text-red mx-auto mb-3" />
           <p className="text-muted">Failed to load vehicles. Please try again.</p>
@@ -46,13 +70,13 @@ export function VehicleGrid() {
   }
 
   return (
-    <section id="inventory" className="py-20 md:py-24 bg-white dark:bg-[#0a0a0a]">
+    <section id="inventory" className="py-20 md:py-24 bg-white">
       <div className="max-w-[1100px] mx-auto px-6 md:px-8">
         <div className="mb-12">
           <p className="text-red text-sm font-semibold tracking-[0.1em] uppercase mb-3">
             Inventory
           </p>
-          <h2 className="text-ink dark:text-white text-3xl md:text-4xl font-black leading-tight mb-4">
+          <h2 className="text-ink text-3xl md:text-4xl font-black leading-tight mb-4">
             Available & sold vehicles
           </h2>
           <p className="text-muted text-base max-w-[500px]">
@@ -60,38 +84,48 @@ export function VehicleGrid() {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap items-center gap-2 mb-12 pb-6 border-b border-[#eee] dark:border-[#222]">
-          <span className="text-muted text-sm mr-3">Filter:</span>
-          {(["all", "sedan", "suv", "pickup"] as const).map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setCategory(cat)}
-              className={`px-3 py-1.5 text-sm font-semibold transition-colors ${
-                category === cat
-                  ? "text-ink dark:text-white bg-[#f5f5f5] dark:bg-[#1a1a1a]"
-                  : "text-muted hover:text-ink dark:hover:text-white"
-              }`}
-              type="button"
+        <div className="mb-12 grid grid-cols-1 gap-4 border-b border-[#eee] pb-6 sm:grid-cols-2 sm:max-w-[460px]">
+          <label className="space-y-1.5">
+            <span className="text-muted text-xs font-semibold uppercase tracking-wider">
+              Category
+            </span>
+            <Select
+              value={category}
+              onValueChange={(value) => setCategory(value as typeof category)}
             >
-              {cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1) + "s"}
-            </button>
-          ))}
-          <span className="text-line dark:text-[#333] mx-2">|</span>
-          {(["all", "arriving", "in-transit", "clearing", "available", "reserved", "sold"] as const).map((stat) => (
-            <button
-              key={stat}
-              onClick={() => setStatus(stat)}
-              className={`px-3 py-1.5 text-sm font-semibold transition-colors ${
-                status === stat
-                  ? "text-ink dark:text-white bg-[#f5f5f5] dark:bg-[#1a1a1a]"
-                  : "text-muted hover:text-ink dark:hover:text-white"
-              }`}
-              type="button"
+              <SelectTrigger className="h-11 w-full rounded-xl border-[#e0e0e0] bg-white px-3 text-ink">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent align="start">
+                {categoryOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </label>
+
+          <label className="space-y-1.5">
+            <span className="text-muted text-xs font-semibold uppercase tracking-wider">
+              Status
+            </span>
+            <Select
+              value={status}
+              onValueChange={(value) => setStatus(value as typeof status)}
             >
-              {stat === "all" ? "All" : stat.charAt(0).toUpperCase() + stat.slice(1)}
-            </button>
-          ))}
+              <SelectTrigger className="h-11 w-full rounded-xl border-[#e0e0e0] bg-white px-3 text-ink">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent align="start">
+                {statusOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </label>
         </div>
 
         <AnimatePresence mode="popLayout">
@@ -106,7 +140,7 @@ export function VehicleGrid() {
           ) : (
             <motion.div
               layout
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14"
+              className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-12"
             >
               {filteredVehicles.map((vehicle) => (
                 <VehicleCard

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/shared/ThemeProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,11 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
-      <body className="min-h-full font-sans bg-white dark:bg-[#0a0a0a] text-ink dark:text-[#f0f0f0]">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <body className="min-h-full font-sans bg-white text-ink">
+        {children}
       </body>
     </html>
   );
